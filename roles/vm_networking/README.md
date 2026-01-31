@@ -3,7 +3,6 @@ Use this section for adding additional content to the README
 This will not be overwritten by Docsible -->
 # 📃 Role overview
 
-
 <!-- STATIC CONTENT END -->
 <!-- Everything below will be overwritten by Docsible -->
 <!-- DOCSIBLE START -->
@@ -17,26 +16,7 @@ Collection - openshift_virtualization_ops
 
 Description: Management of Virtual Machine networking.
 
-| Field                | Value           |
-|--------------------- |-----------------|
-| Readme update        | 18/03/2025 |
-
-
-
-
-
-
-
-
-
-
-
-
 ### Tasks
-
-
-
-
 
 ## Playbook
 
@@ -51,18 +31,27 @@ Description: Management of Virtual Machine networking.
 
 ```
 
+## Playbook graph
+
+```mermaid
+flowchart TD
+  hosts[localhost]-->|Role| vm_networking[vm networking]
+```
 
 ## Author Information
 
-#### License
+OpenShift Virtualization Migration Contributors
+
+## License
 
 GPL-3.0-only
 
-#### Minimum Ansible Version
+## Minimum Ansible Version
 
 2.15.0
 
-#### Platforms
+## Platforms
 
 No platforms specified.
+
 <!-- DOCSIBLE END -->
