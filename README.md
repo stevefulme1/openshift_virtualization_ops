@@ -1,5 +1,11 @@
 # OpenShift Virtualization Operations Collection
 
+![GitHub Release](https://img.shields.io/github/v/release/redhat-cop/openshift_virtualization_ops?include_prereleases&style=flat-square)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/redhat-cop/openshift_virtualization_ops/ci.yml?style=flat-square&label=release)](https://github.com/redhat-cop/openshift_virtualization_ops/actions)
+[![Semantic Versioning](https://img.shields.io/badge/semver-2.0.0-blue?style=flat-square)](https://semver.org/)
+[![License](https://img.shields.io/github/license/redhat-cop/openshift_virtualization_ops?style=flat-square)](LICENSE)
+
+
 This repository contains tooling to support the operational aspects of OpenShift Virtualization.
 
 <!-- add collection requirements -->
