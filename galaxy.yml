@@ -7,7 +7,8 @@ namespace: infra
 name: openshift_virtualization_ops
 version: 1.0.1
 readme: README.md
-authors: []
+authors:
+  - OpenShift Virtualization Migration Contributors
 
 description: "This collection provides content for the management and maintenance of
   VM workloads within Red Hat OpenShift Virtualization."
