@@ -1,6 +1,6 @@
 ---
 
-- name: "Query VirtualMachines — {{ _vm_consumption_report_query.namespace | default('all-namespaces') }}"
+- name: "_collect_vms | Query VirtualMachines — {{ _vm_consumption_report_query.namespace | default('all-namespaces') }}"
   kubernetes.core.k8s_info:
     api_key: "{{ vm_consumption_report_openshift_api_key }}"
     host: "{{ vm_consumption_report_openshift_host }}"
@@ -11,7 +11,7 @@
     validate_certs: "{{ vm_consumption_report_openshift_verify_ssl }}"
   register: _vm_consumption_report_vm_response
 
-- name: Filter VMs by Name (if specified)
+- name: _collect_vms | Filter VMs by Name (if specified)
   ansible.builtin.set_fact:
     _vm_consumption_report_filtered: >-
       {{ _vm_consumption_report_vm_response.resources
@@ -19,12 +19,12 @@
          | list }}
   when: "'names' in _vm_consumption_report_query"
 
-- name: Use All Returned VMs (no name filter)
+- name: _collect_vms | Use All Returned VMs (no name filter)
   ansible.builtin.set_fact:
     _vm_consumption_report_filtered: "{{ _vm_consumption_report_vm_response.resources }}"
   when: "'names' not in _vm_consumption_report_query"
 
-- name: Append VMs to Collection
+- name: _collect_vms | Append VMs to Collection
   ansible.builtin.set_fact:
     _vm_consumption_report_vms: "{{ _vm_consumption_report_vms + _vm_consumption_report_filtered }}"
 ...

@@ -1,6 +1,6 @@
 ---
 
-- name: Build VM Entries
+- name: _build_report | Build VM Entries
   ansible.builtin.set_fact:
     _vm_consumption_report_entries: >-
       {{ _vm_consumption_report_entries | default([]) + [_entry] }}
@@ -57,7 +57,7 @@
     loop_var: _vm
     label: "{{ _vm.metadata.namespace }}/{{ _vm.metadata.name }}"
 
-- name: Build Direct-Only Entries
+- name: _build_report | Build Direct-Only Entries
   ansible.builtin.set_fact:
     _vm_consumption_report_direct_only: >-
       {{ _vm_consumption_report_direct_only | default([]) + [_direct_entry] }}
@@ -88,7 +88,7 @@
     - _host.hostname not in _matched_hosts
     - (_host.uuid | default('')) not in ((_vm_consumption_report_entries | default([])) | map(attribute='uuid') | list)
 
-- name: Compile Final Report
+- name: _build_report | Compile Final Report
   ansible.builtin.set_fact:
     vm_consumption_report_result:
       generated_at: "{{ now(utc=true, fmt='%Y-%m-%dT%H:%M:%SZ') }}"
