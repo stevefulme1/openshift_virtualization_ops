@@ -7,12 +7,17 @@
     fail_msg: "'vm_storage_labeling_request' Variable Not Provided"
     quiet: true
 
-- name: Verify Required Properties Provided
+- name: Verify Namespace Provided When Names Specified
   ansible.builtin.assert:
     that:
-      - vm_storage_labeling_request | selectattr('namespace', 'undefined') | list | length == 0
-    fail_msg: "Required property 'namespace' in 'vm_storage_labeling_request' Variable Not Provided"
+      - "'namespace' in vm_storage_labeling_item"
+    fail_msg: "Must provide a namespace when 'names' are specified"
     quiet: true
+  loop: "{{ vm_storage_labeling_request }}"
+  loop_control:
+    loop_var: vm_storage_labeling_item
+    label: "{{ vm_storage_labeling_item.namespace | default('all-namespaces') }}"
+  when: vm_storage_labeling_item.names | default([], true) | length > 0
 
 - name: Verify Labels or Annotations Provided
   ansible.builtin.assert:
@@ -27,7 +32,7 @@
   loop: "{{ vm_storage_labeling_request }}"
   loop_control:
     loop_var: vm_storage_labeling_item
-    label: "Namespace: {{ vm_storage_labeling_item.namespace }}"
+    label: "{{ vm_storage_labeling_item.namespace | default('all-namespaces') }}"
 
 - name: Process Storage Volume Labeling Request
   ansible.builtin.include_tasks:
@@ -35,6 +40,6 @@
   loop: "{{ vm_storage_labeling_request }}"
   loop_control:
     loop_var: vm_storage_labeling_current_request
-    label: "Namespace: {{ vm_storage_labeling_current_request.namespace }}"
+    label: "{{ vm_storage_labeling_current_request.namespace | default('all-namespaces') }}"
 
 ...

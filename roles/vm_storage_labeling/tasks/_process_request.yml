@@ -7,7 +7,7 @@
     host: "{{ vm_storage_labeling_openshift_host }}"
     api_version: v1
     kind: PersistentVolumeClaim
-    namespace: "{{ vm_storage_labeling_current_request.namespace }}"
+    namespace: "{{ vm_storage_labeling_current_request.namespace | default(omit) }}"
     name: "{{ vm_storage_labeling_pvc_name }}"
     validate_certs: "{{ vm_storage_labeling_openshift_verify_ssl }}"
   register: vm_storage_labeling_pvc_by_name
@@ -23,7 +23,7 @@
     host: "{{ vm_storage_labeling_openshift_host }}"
     api_version: v1
     kind: PersistentVolumeClaim
-    namespace: "{{ vm_storage_labeling_current_request.namespace }}"
+    namespace: "{{ vm_storage_labeling_current_request.namespace | default(omit) }}"
     label_selectors: "{{ vm_storage_labeling_current_request.label_selectors }}"
     validate_certs: "{{ vm_storage_labeling_openshift_verify_ssl }}"
   register: vm_storage_labeling_pvc_by_selector
@@ -37,7 +37,7 @@
     host: "{{ vm_storage_labeling_openshift_host }}"
     api_version: v1
     kind: PersistentVolumeClaim
-    namespace: "{{ vm_storage_labeling_current_request.namespace }}"
+    namespace: "{{ vm_storage_labeling_current_request.namespace | default(omit) }}"
     validate_certs: "{{ vm_storage_labeling_openshift_verify_ssl }}"
   register: vm_storage_labeling_pvc_all
 
@@ -65,7 +65,8 @@
     that:
       - vm_storage_labeling_volumes | default([], true) | length > 0
     fail_msg: >-
-      No PersistentVolumeClaims found in namespace '{{ vm_storage_labeling_current_request.namespace }}'
+      No PersistentVolumeClaims found in
+      {{ vm_storage_labeling_current_request.namespace | default('all namespaces') }}
       matching the provided criteria
     quiet: true
 

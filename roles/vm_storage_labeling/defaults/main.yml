@@ -5,9 +5,10 @@
 # required: True
 # description: List of Storage Volume Labeling Requests
 vm_storage_labeling_request: []
-# -  namespace: <namespace> # Namespace containing storage volumes to label.
+# -  namespace: <namespace> # Namespace to scope volumes. \
+#      Required when names are specified. Omit to query all namespaces.
 #    names: # List of PVC/DataVolume names within a namespace. \
-#      Optional when using label_selectors.
+#      Requires namespace. Optional when using label_selectors.
 #    label_selectors: # Label selectors to match volumes. \
 #      Cannot be used with list of volume names.
 #      - <key>=<value>
