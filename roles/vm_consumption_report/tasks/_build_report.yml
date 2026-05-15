@@ -11,7 +11,9 @@
          | selectattr('metadata.name', 'equalto', _vm.metadata.name)
          | list | first | default({}) }}
     _vm_uuid: "{{ _vm.metadata.uid }}"
-    _guest_hostname: ''
+    _guest_hostname: >-
+      {{ _vm.spec.template.spec.hostname
+         | default(_vm.metadata.name) }}
     _guest_ip_addresses: >-
       {{ _vmi_match.status.interfaces
          | default([])
