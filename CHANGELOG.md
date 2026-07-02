@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [Unreleased]
+
+### Added
+- `rvtools_parse` module for parsing RVTools xlsx and CSV exports
+- `rvtools_transform` filter plugin for converting parsed data to role request formats
+- `rvtools_import.yml` playbook for end-to-end RVTools import workflow
+- `openpyxl` Python dependency for xlsx support
+- Unit tests for rvtools_parse module and rvtools_transform filter
+
 ## v1.0.2 (2026-04-15)
 
 ### Bug Fixes
